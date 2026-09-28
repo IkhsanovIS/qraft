@@ -15,7 +15,7 @@
 package raft
 
 import (
-	pb "go.etcd.io/raft/v3/raftpb"
+	pb "github.com/IkhsanovIS/qraft/v3/raftpb"
 )
 
 func applyToStore(_ []pb.Entry)      {}

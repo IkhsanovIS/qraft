@@ -25,7 +25,7 @@ import (
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 
-	"go.etcd.io/raft/v3/raftpb"
+	"github.com/IkhsanovIS/qraft/v3/raftpb"
 )
 
 // readyWithTimeout selects from n.Ready() with a 1-second timeout. It
@@ -474,6 +474,56 @@ func TestNodeStop(t *testing.T) {
 
 	// Subsequent Stops should have no effect.
 	n.Stop()
+}
+
+func TestNodeRoleChan(t *testing.T) {
+	s := newTestMemoryStorage(withPeers(1))
+	rn := newTestRawNode(1, 10, 1, s)
+	n := newNode(rn)
+	go n.run()
+	rolec := n.RoleChan().Out()
+	select {
+	case role := <-rolec:
+		assert.Equal(t, NOT_LEADER, role)
+	case <-time.After(time.Second):
+		t.Fatal("timed out waiting for initial role")
+	}
+
+	require.NoError(t, n.Campaign(t.Context()))
+	for {
+		rd := readyWithTimeout(&n)
+		require.NoError(t, s.Append(rd.Entries))
+		becameLeader := rd.SoftState != nil && rd.RaftState == StateLeader
+		n.Advance()
+		if becameLeader {
+			break
+		}
+	}
+	select {
+	case role := <-rolec:
+		assert.Equal(t, LEADER, role)
+	case <-time.After(time.Second):
+		t.Fatal("timed out waiting for leader role")
+	}
+
+	// A message from a higher term makes this node a follower again.
+	require.NoError(t, n.Step(t.Context(), raftpb.Message{
+		Type: raftpb.MsgApp, From: 2, Term: 2,
+	}))
+	select {
+	case role := <-rolec:
+		assert.Equal(t, NOT_LEADER, role)
+	case <-time.After(time.Second):
+		t.Fatal("timed out waiting for non-leader role")
+	}
+
+	n.Stop()
+	select {
+	case _, ok := <-rolec:
+		assert.False(t, ok)
+	case <-time.After(time.Second):
+		t.Fatal("timed out waiting for role channel to close")
+	}
 }
 
 // TestNodeStart ensures that a node can be started correctly. The node should

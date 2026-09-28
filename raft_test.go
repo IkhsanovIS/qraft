@@ -24,8 +24,8 @@ import (
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 
-	pb "go.etcd.io/raft/v3/raftpb"
-	"go.etcd.io/raft/v3/tracker"
+	pb "github.com/IkhsanovIS/qraft/v3/raftpb"
+	"github.com/IkhsanovIS/qraft/v3/tracker"
 )
 
 // nextEnts returns the appliable entries and updates the applied index.

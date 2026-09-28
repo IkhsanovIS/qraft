@@ -23,7 +23,7 @@ import (
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 
-	pb "go.etcd.io/raft/v3/raftpb"
+	pb "github.com/IkhsanovIS/qraft/v3/raftpb"
 )
 
 var testFormatter EntryFormatter = func(data []byte) string {

@@ -20,7 +20,7 @@ import (
 
 	"github.com/stretchr/testify/assert"
 
-	"go.etcd.io/raft/v3/raftpb"
+	"github.com/IkhsanovIS/qraft/v3/raftpb"
 )
 
 func TestNetworkDrop(t *testing.T) {

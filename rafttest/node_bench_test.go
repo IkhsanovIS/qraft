@@ -19,7 +19,7 @@ import (
 	"testing"
 	"time"
 
-	"go.etcd.io/raft/v3"
+	"github.com/IkhsanovIS/qraft/v3"
 )
 
 func BenchmarkProposal3Nodes(b *testing.B) {

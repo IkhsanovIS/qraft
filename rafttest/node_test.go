@@ -21,7 +21,7 @@ import (
 
 	"github.com/stretchr/testify/assert"
 
-	"go.etcd.io/raft/v3"
+	"github.com/IkhsanovIS/qraft/v3"
 )
 
 func TestBasicProgress(t *testing.T) {

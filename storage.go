@@ -18,7 +18,7 @@ import (
 	"errors"
 	"sync"
 
-	pb "go.etcd.io/raft/v3/raftpb"
+	pb "github.com/IkhsanovIS/qraft/v3/raftpb"
 )
 
 // ErrCompacted is returned by Storage.Entries/Compact when a requested

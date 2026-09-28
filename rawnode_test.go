@@ -20,12 +20,13 @@ import (
 	"math"
 	"testing"
 
+	"github.com/eapache/channels"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 
-	"go.etcd.io/raft/v3/quorum"
-	pb "go.etcd.io/raft/v3/raftpb"
-	"go.etcd.io/raft/v3/tracker"
+	"github.com/IkhsanovIS/qraft/v3/quorum"
+	pb "github.com/IkhsanovIS/qraft/v3/raftpb"
+	"github.com/IkhsanovIS/qraft/v3/tracker"
 )
 
 // rawNodeAdapter is essentially a lint that makes sure that RawNode implements
@@ -57,6 +58,9 @@ func (a *rawNodeAdapter) Advance() { a.RawNode.Advance(Ready{}) }
 
 // Ready when RawNode returns a Ready, not a chan of one.
 func (a *rawNodeAdapter) Ready() <-chan Ready { return nil }
+
+// RoleChan is only provided by Node's run loop.
+func (a *rawNodeAdapter) RoleChan() *channels.RingChannel { return nil }
 
 // Node takes more contexts. Easy enough to fix.
 
