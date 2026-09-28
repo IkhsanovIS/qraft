@@ -17,7 +17,7 @@ package raft
 import (
 	"google.golang.org/protobuf/proto"
 
-	pb "go.etcd.io/raft/v3/raftpb"
+	pb "github.com/IkhsanovIS/qraft/v3/raftpb"
 )
 
 // unstable contains "unstable" log entries and snapshot state that has

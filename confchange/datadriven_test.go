@@ -23,8 +23,9 @@ import (
 
 	"github.com/cockroachdb/datadriven"
 
-	pb "go.etcd.io/raft/v3/raftpb"
-	"go.etcd.io/raft/v3/tracker"
+	"github.com/IkhsanovIS/qraft/v3/internal/ptr"
+	pb "github.com/IkhsanovIS/qraft/v3/raftpb"
+	"github.com/IkhsanovIS/qraft/v3/tracker"
 )
 
 func TestConfChangeDataDriven(t *testing.T) {
@@ -75,7 +76,7 @@ func TestConfChangeDataDriven(t *testing.T) {
 				if err != nil {
 					return err.Error()
 				}
-				cc.NodeId = new(id)
+				cc.NodeId = ptr.To(id)
 				ccs = append(ccs, cc)
 			}
 

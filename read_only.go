@@ -17,8 +17,8 @@ package raft
 import (
 	"encoding/binary"
 
-	"go.etcd.io/raft/v3/quorum"
-	pb "go.etcd.io/raft/v3/raftpb"
+	"github.com/IkhsanovIS/qraft/v3/quorum"
+	pb "github.com/IkhsanovIS/qraft/v3/raftpb"
 )
 
 // ReadState provides state for read only query.

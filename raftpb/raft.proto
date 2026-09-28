@@ -1,7 +1,7 @@
 syntax = "proto2";
 package raftpb;
 
-option go_package="go.etcd.io/raft/v3/raftpb";
+option go_package="github.com/IkhsanovIS/qraft/v3/raftpb";
 
 enum EntryType {
 	EntryNormal       = 0;
@@ -28,7 +28,7 @@ message Snapshot {
 }
 
 // For description of different message types, see:
-// https://pkg.go.dev/go.etcd.io/raft/v3#hdr-MessageType
+// https://pkg.go.dev/github.com/IkhsanovIS/qraft/v3#hdr-MessageType
 enum MessageType {
 	MsgHup               = 0;
 	MsgBeat              = 1;

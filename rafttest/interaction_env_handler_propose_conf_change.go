@@ -21,7 +21,8 @@ import (
 
 	"github.com/cockroachdb/datadriven"
 
-	"go.etcd.io/raft/v3/raftpb"
+	"github.com/IkhsanovIS/qraft/v3/internal/ptr"
+	"github.com/IkhsanovIS/qraft/v3/raftpb"
 )
 
 func (env *InteractionEnv) handleProposeConfChange(t *testing.T, d datadriven.TestData) error {
@@ -66,7 +67,7 @@ func (env *InteractionEnv) handleProposeConfChange(t *testing.T, d datadriven.Te
 		}
 		c = &raftpb.ConfChange{
 			Type:   ccs[0].GetType().Enum(),
-			NodeId: new(ccs[0].GetNodeId()),
+			NodeId: ptr.To(ccs[0].GetNodeId()),
 		}
 	} else {
 		c = &raftpb.ConfChangeV2{

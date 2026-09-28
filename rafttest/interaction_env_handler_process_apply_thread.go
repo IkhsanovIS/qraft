@@ -21,8 +21,9 @@ import (
 	"github.com/cockroachdb/datadriven"
 	"google.golang.org/protobuf/proto"
 
-	"go.etcd.io/raft/v3"
-	"go.etcd.io/raft/v3/raftpb"
+	raft "github.com/IkhsanovIS/qraft/v3"
+	"github.com/IkhsanovIS/qraft/v3/internal/ptr"
+	"github.com/IkhsanovIS/qraft/v3/raftpb"
 )
 
 func (env *InteractionEnv) handleProcessApplyThread(t *testing.T, d datadriven.TestData) error {
@@ -99,8 +100,8 @@ func processApply(n *Node, ents []*raftpb.Entry) error {
 		snap.Data = append(snap.Data, lastSnap.Data...)
 		// NB: this hard-codes an "appender" state machine.
 		snap.Data = append(snap.Data, update...)
-		snap.Metadata.Index = new(ent.GetIndex())
-		snap.Metadata.Term = new(ent.GetTerm())
+		snap.Metadata.Index = ptr.To(ent.GetIndex())
+		snap.Metadata.Term = ptr.To(ent.GetTerm())
 		if cs == nil {
 			sl := n.History
 			cs = sl[len(sl)-1].GetMetadata().GetConfState()

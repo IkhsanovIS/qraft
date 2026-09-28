@@ -21,7 +21,7 @@ import (
 
 	"google.golang.org/protobuf/proto"
 
-	"go.etcd.io/raft/v3/raftpb"
+	"github.com/IkhsanovIS/qraft/v3/raftpb"
 )
 
 // a network interface

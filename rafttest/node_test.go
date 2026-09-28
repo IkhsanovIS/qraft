@@ -18,9 +18,8 @@ import (
 	"testing"
 	"time"
 
+	raft "github.com/IkhsanovIS/qraft/v3"
 	"github.com/stretchr/testify/assert"
-
-	"go.etcd.io/raft/v3"
 )
 
 func TestBasicProgress(t *testing.T) {

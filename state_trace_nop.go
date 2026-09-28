@@ -17,8 +17,8 @@
 package raft
 
 import (
-	"go.etcd.io/raft/v3/raftpb"
-	"go.etcd.io/raft/v3/tracker"
+	"github.com/IkhsanovIS/qraft/v3/raftpb"
+	"github.com/IkhsanovIS/qraft/v3/tracker"
 )
 
 const StateTraceDeployed = false

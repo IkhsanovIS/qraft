@@ -1,8 +1,6 @@
-module go.etcd.io/raft/v3
+module github.com/IkhsanovIS/qraft/v3
 
-go 1.26
-
-toolchain go1.26.8
+go 1.25.0
 
 require (
 	github.com/cockroachdb/datadriven v1.0.3

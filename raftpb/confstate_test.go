@@ -17,6 +17,7 @@ package raftpb
 import (
 	"testing"
 
+	"github.com/IkhsanovIS/qraft/v3/internal/ptr"
 	"github.com/stretchr/testify/require"
 )
 
@@ -47,7 +48,7 @@ func TestConfState_Equivalent(t *testing.T) {
 		// Non-equivalent learners.
 		{&ConfState{Voters: []uint64{1, 2, 3, 4}}, &ConfState{Voters: []uint64{2, 1, 3}}, false},
 		// Sensitive to AutoLeave flag.
-		{&ConfState{AutoLeave: new(true)}, &ConfState{}, false},
+		{&ConfState{AutoLeave: ptr.To(true)}, &ConfState{}, false},
 	}
 
 	for _, tc := range testCases {

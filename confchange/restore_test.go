@@ -23,8 +23,9 @@ import (
 
 	"github.com/stretchr/testify/assert"
 
-	pb "go.etcd.io/raft/v3/raftpb"
-	"go.etcd.io/raft/v3/tracker"
+	"github.com/IkhsanovIS/qraft/v3/internal/ptr"
+	pb "github.com/IkhsanovIS/qraft/v3/raftpb"
+	"github.com/IkhsanovIS/qraft/v3/tracker"
 )
 
 type rndConfChange pb.ConfState
@@ -79,7 +80,7 @@ func (*rndConfChange) Generate(rand *rand.Rand, _ int) reflect.Value {
 		}
 	}
 
-	cs.AutoLeave = new(len(cs.VotersOutgoing) > 0 && rand.Intn(2) == 1)
+	cs.AutoLeave = ptr.To(len(cs.VotersOutgoing) > 0 && rand.Intn(2) == 1)
 	return reflect.ValueOf((*rndConfChange)(cs))
 }
 

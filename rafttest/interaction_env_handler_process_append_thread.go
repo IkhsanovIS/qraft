@@ -22,8 +22,9 @@ import (
 	"github.com/cockroachdb/datadriven"
 	"google.golang.org/protobuf/proto"
 
-	"go.etcd.io/raft/v3"
-	"go.etcd.io/raft/v3/raftpb"
+	raft "github.com/IkhsanovIS/qraft/v3"
+	"github.com/IkhsanovIS/qraft/v3/internal/ptr"
+	"github.com/IkhsanovIS/qraft/v3/raftpb"
 )
 
 func (env *InteractionEnv) handleProcessAppendThread(t *testing.T, d datadriven.TestData) error {
@@ -59,9 +60,9 @@ func (env *InteractionEnv) ProcessAppendThread(idx int) error {
 	env.Output.WriteString("Processing:\n")
 	env.Output.WriteString(raft.DescribeMessage(m, defaultEntryFormatter) + "\n")
 	st := &raftpb.HardState{
-		Term:   new(m.GetTerm()),
-		Vote:   new(m.GetVote()),
-		Commit: new(m.GetCommit()),
+		Term:   ptr.To(m.GetTerm()),
+		Vote:   ptr.To(m.GetVote()),
+		Commit: ptr.To(m.GetCommit()),
 	}
 	snap := m.GetSnapshot()
 	var cloned *raftpb.Snapshot

@@ -19,8 +19,9 @@ import (
 	"slices"
 	"strings"
 
-	"go.etcd.io/raft/v3/quorum"
-	pb "go.etcd.io/raft/v3/raftpb"
+	"github.com/IkhsanovIS/qraft/v3/internal/ptr"
+	"github.com/IkhsanovIS/qraft/v3/quorum"
+	pb "github.com/IkhsanovIS/qraft/v3/raftpb"
 )
 
 // Config reflects the configuration tracked in a ProgressTracker.
@@ -151,7 +152,7 @@ func (p *ProgressTracker) ConfState() *pb.ConfState {
 		VotersOutgoing: p.Voters[1].Slice(),
 		Learners:       quorum.MajorityConfig(p.Learners).Slice(),
 		LearnersNext:   quorum.MajorityConfig(p.LearnersNext).Slice(),
-		AutoLeave:      new(p.AutoLeave),
+		AutoLeave:      ptr.To(p.AutoLeave),
 	}
 }
 
