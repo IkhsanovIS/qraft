@@ -481,6 +481,7 @@ func TestNodeRoleChan(t *testing.T) {
 	rn := newTestRawNode(1, 10, 1, s)
 	n := newNode(rn)
 	go n.run()
+	t.Cleanup(n.Stop)
 	rolec := n.RoleChan().Out()
 	select {
 	case role := <-rolec:
